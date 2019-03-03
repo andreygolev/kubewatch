@@ -1,0 +1,32 @@
+handler:
+  slack:
+    token: ""
+    channel: "" 
+  hipchat:
+    token: ""
+    room: ""
+    url: ""
+  mattermost:
+    channel: ""
+    url: ""
+    username: ""
+  flock:
+    url: ""
+  webhook:
+    url: ""
+  toast:
+    mode: "notify"
+resource:
+  deployment: false
+  replicationcontroller: false
+  replicaset: false
+  daemonset: false
+  services: true
+  pod: true
+  job: false
+  persistentvolume: false
+  namespace: false
+  secret: false
+  configmap: false
+  ingress: false
+namespace: ""

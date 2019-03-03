@@ -33,6 +33,7 @@ type Handler struct {
 	Mattermost Mattermost `json:"mattermost"`
 	Flock      Flock      `json:"flock"`
 	Webhook    Webhook    `json:"webhook"`
+	Toast      Toast      `json:"toast"`
 }
 
 // Resource contains resource configuration
@@ -89,6 +90,11 @@ type Flock struct {
 // Webhook contains webhook configuration
 type Webhook struct {
 	Url string `json:"url"`
+}
+
+// Toast contains toast configuration
+type Toast struct {
+	Mode string `json:"mode"`
 }
 
 // New creates new config object
@@ -212,15 +218,15 @@ func getConfigFile() string {
 }
 
 func configDir() string {
-    if configDir := os.Getenv("KW_CONFIG"); configDir != "" {
-        return configDir
-    }
+	if configDir := os.Getenv("KW_CONFIG"); configDir != "" {
+		return configDir
+	}
 
-    if runtime.GOOS == "windows" {
-        home := os.Getenv("USERPROFILE")
-        return home
-    }
-    return os.Getenv("HOME")
+	if runtime.GOOS == "windows" {
+		home := os.Getenv("USERPROFILE")
+		return home
+	}
+	return os.Getenv("HOME")
 	//path := "/etc/kubewatch"
 	//if _, err := os.Stat(path); os.IsNotExist(err) {
 	//	os.Mkdir(path, 755)

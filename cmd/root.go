@@ -45,6 +45,7 @@ supported webhooks:
  - hipchat
  - mattermost
  - flock
+ - toast
  - webhook
 `,
 

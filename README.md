@@ -19,6 +19,7 @@ supported webhooks:
  - hipchat
  - mattermost
  - flock
+ - toast
  - webhook
 
 Usage:
@@ -179,8 +180,8 @@ Usage:
   kubewatch config [command]
 
 Available Commands:
-  add         add webhook config to .kubewatch.yaml
-  view        view .kubewatch.yaml
+  add         add webhook config to $HOME/.kubewatch.yaml
+  view        view $HOME/.kubewatch.yaml
 
 Flags:
   -h, --help   help for config
@@ -227,7 +228,7 @@ Use "kubewatch config [command] --help" for more information about a command.
 To view the entire config file `$HOME/.kubewatch.yaml` use the following command.
 ```
 $ kubewatch config view
-Contents of .kubewatch.yaml
+Contents of $HOME/.kubewatch.yaml
 
 handler:
   slack:

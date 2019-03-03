@@ -17,9 +17,10 @@ limitations under the License.
 package cmd
 
 import (
-	"os"
 	"fmt"
 	"io/ioutil"
+	"os"
+
 	"github.com/spf13/cobra"
 )
 
@@ -35,27 +36,27 @@ config command allows admin setup his own configuration for running kubewatch`,
 }
 
 var configAddCmd = &cobra.Command{
-	Use: "add",
-	Short: "add webhook config to .kubewatch.yaml",
+	Use:   "add",
+	Short: "add webhook config to $HOME/.kubewatch.yaml",
 	Long: `
-Adds webhook config to .kubewatch.yaml`,
+Adds webhook config to $HOME/.kubewatch.yaml`,
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
 	},
 }
 
 var configViewCmd = &cobra.Command{
-	Use: "view",
-	Short: "view .kubewatch.yaml",
+	Use:   "view",
+	Short: "view $HOME/.kubewatch.yaml",
 	Long: `
-display the contents of the contents of .kubewatch.yaml`,
+display the contents of the contents of $HOME/.kubewatch.yaml`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Contents of .kubewatch.yaml")
-		configFile, err := ioutil.ReadFile(os.Getenv("HOME")+"/"+".kubewatch.yaml")
-    	if err != nil {
-        	fmt.Printf("yamlFile.Get err   #%v ", err)
-    	}
-		fmt.Println(string(configFile))	
+		configFile, err := ioutil.ReadFile(os.Getenv("HOME") + "/" + ".kubewatch.yaml")
+		if err != nil {
+			fmt.Printf("yamlFile.Get err   #%v ", err)
+		}
+		fmt.Println(string(configFile))
 	},
 }
 
@@ -71,5 +72,6 @@ func init() {
 		mattermostConfigCmd,
 		flockConfigCmd,
 		webhookConfigCmd,
+		toastConfigCmd,
 	)
 }
