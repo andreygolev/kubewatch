@@ -1,4 +1,4 @@
-.PHONY: default build docker-image test stop clean-images clean
+.PHONY: default build build-linux docker-image test stop clean-images clean
 
 BINARY = kubewatch
 
@@ -14,6 +14,10 @@ LDFLAGS       := "-X '$(PKG)/cmd.gitCommit=$(TRAVIS_COMMIT)' \
 		          -X '$(PKG)/cmd.buildDate=$(BUILD_DATE)'"
 
 default: build test
+
+
+build-linux:
+	CGO_ENABLED=0 GOOS=linux $(GOCMD) build -a -installsuffix cgo ${GOFLAGS} -ldflags ${LDFLAGS} -o ${BINARY}
 
 build:
 	"$(GOCMD)" build ${GOFLAGS} -ldflags ${LDFLAGS} -o "${BINARY}"

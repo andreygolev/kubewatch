@@ -69,6 +69,7 @@ resourcesToWatch:
   secret: false
   configmap: false
   ingress: false
+  networkpolicy: false
 slack:
   channel: '#YOUR_CHANNEL'
   token: 'xoxb-YOUR_TOKEN'
@@ -123,6 +124,8 @@ resource:
   secret: false
   configmap: false
   ingress: false
+  networkpolicy: false
+
 ```
 
 #### Working with RBAC
@@ -299,6 +302,8 @@ resource:
   secret: false
   configmap: false
   ingress: false
+  networkpolicy: false
+
 namespace: ""
 
 ```
@@ -338,6 +343,7 @@ Flags:
       --sa            watch for service accounts
       --secret        watch for plain secrets
       --svc           watch for services
+      --networkpolicy watch for networkpolicies
 
 Use "kubewatch resource [command] --help" for more information about a command.
 
@@ -371,6 +377,7 @@ Global Flags:
       --sa            watch for service accounts
       --secret        watch for plain secrets
       --svc           watch for services
+      --networkpolicy watch for networkpolicies
 
 ```
 

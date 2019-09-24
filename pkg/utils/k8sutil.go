@@ -10,6 +10,7 @@ import (
 	ext_v1beta1 "k8s.io/api/extensions/v1beta1"
 	meta_v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	rbac_v1beta1 "k8s.io/api/rbac/v1beta1"
+	networking_v1 "k8s.io/api/networking/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
@@ -86,6 +87,8 @@ func GetObjectMetaData(obj interface{}) meta_v1.ObjectMeta {
 	case *rbac_v1beta1.ClusterRole:
 		objectMeta = object.ObjectMeta
 	case *api_v1.ServiceAccount:
+		objectMeta = object.ObjectMeta
+	case *networking_v1.NetworkPolicy:
 		objectMeta = object.ObjectMeta
 	}
 	return objectMeta

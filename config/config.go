@@ -47,6 +47,7 @@ type Resource struct {
 	Services              bool `json:"svc"`
 	Pod                   bool `json:"po"`
 	Job                   bool `json:"job"`
+    NetworkPolicy         bool `json:"networkpolicy"`
 	Node                  bool `json:"node"`
 	ClusterRole           bool `json:"clusterrole"`
 	ServiceAccount        bool `json:"sa"`
@@ -192,6 +193,9 @@ func (c *Config) CheckMissingResourceEnvvars() {
 	if !c.Resource.Ingress && os.Getenv("KW_INGRESS") == "true" {
 		c.Resource.Ingress = true
 	}
+    if !c.Resource.NetworkPolicy && os.Getenv("KW_NETWORKPOLICY") == "true" {
+        c.Resource.NetworkPolicy = true
+    }
 	if !c.Resource.Node && os.Getenv("KW_NODE") == "true" {
 		c.Resource.Node = true
 	}

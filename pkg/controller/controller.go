@@ -34,6 +34,7 @@ import (
 	api_v1 "k8s.io/api/core/v1"
 	ext_v1beta1 "k8s.io/api/extensions/v1beta1"
 	rbac_v1beta1 "k8s.io/api/rbac/v1beta1"
+    networking_v1 "k8s.io/api/networking/v1"
 	meta_v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
@@ -250,6 +251,28 @@ func Start(conf *config.Config, eventHandler handlers.Handler) {
 
 		go c.Run(stopCh)
 	}
+
+        if conf.Resource.NetworkPolicy {
+            informer := cache.NewSharedIndexInformer(
+                &cache.ListWatch{
+                    ListFunc: func(options meta_v1.ListOptions) (runtime.Object, error) {
+						return kubeClient.NetworkingV1().NetworkPolicies(conf.Namespace).List(options)
+                    },
+                    WatchFunc: func(options meta_v1.ListOptions) (watch.Interface, error) {
+                        return kubeClient.NetworkingV1().NetworkPolicies(conf.Namespace).Watch(options)
+                    },
+                },
+                &networking_v1.NetworkPolicy{},
+                0, //Skip resync
+                cache.Indexers{},
+            )
+
+                c := newResourceController(kubeClient, eventHandler, informer, "networkpolicy")
+                stopCh := make(chan struct{})
+                defer close(stopCh)
+
+                go c.Run(stopCh)
+        }
 
 	if conf.Resource.Node {
 		informer := cache.NewSharedIndexInformer(
